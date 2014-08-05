@@ -191,6 +191,8 @@ DEFINE_GETTER_SETTER_BOOL(take_union_field_addr);
 DEFINE_GETTER_SETTER_BOOL(vol_struct_union_fields);
 DEFINE_GETTER_SETTER_BOOL(lang_cpp);
 
+bool CGOptions::cilk = false;
+
 void
 CGOptions::set_default_builtin_kinds()
 {

@@ -1375,6 +1375,10 @@ main(int argc, char **argv)
 			CGOptions::init_reducer(filename);
 			continue;
 		}
+		if (strcmp (argv[i], "--cilk") == 0) {
+			CGOptions::cilk = true;
+			continue;
+		}
 		// OMIT help
 
 		// OMIT compute-hash

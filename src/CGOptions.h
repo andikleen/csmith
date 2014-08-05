@@ -453,6 +453,8 @@ public:
 	static void disable_builtin_kinds(const string &kinds);
 	static bool enabled_builtin(const string &ks);
 
+	static bool cilk;
+
 private:
 	static bool enabled_builtin_kind(const string &kind);
 

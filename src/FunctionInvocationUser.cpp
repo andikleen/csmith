@@ -436,7 +436,10 @@ OutputExpressionVector(const vector<const Expression*> &var, std::ostream &out)
 void
 FunctionInvocationUser::Output(std::ostream &out) const
 {
-	out << func->name << "(";
+	// XXX check context 
+	if (CGOptions::cilk) 
+		out << "_Cilk_spawn ";
+       	out << func->name << "(";
 	OutputExpressionVector(param_value, out);
 	out << ")";
 }
