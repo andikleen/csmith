@@ -449,6 +449,8 @@ public:
 	static bool lang_cpp(void);
 	static bool lang_cpp(bool p);
 
+	static bool pragma_opt;
+
 	static void enable_builtin_kinds(const string &kinds);
 	static void disable_builtin_kinds(const string &kinds);
 	static bool enabled_builtin(const string &ks);

@@ -513,11 +513,13 @@ Function::OutputFormalParamList(std::ostream &out)
 	}
 }
 
+#define NELE(x) (sizeof(x) / (sizeof(*(x))))
+
 /*
  *
  */
 void
-Function::OutputHeader(std::ostream &out)
+Function::OutputHeader(std::ostream &out, bool gen_opt = true)
 {
 	if (!CGOptions::return_structs() && return_type)
 		assert(return_type->eType != eStruct);
@@ -528,6 +530,35 @@ Function::OutputHeader(std::ostream &out)
 	// force functions to be static if necessary
 	if (CGOptions::force_globals_static()) {
 		out << "static ";
+	}
+	if (gen_opt && CGOptions::pragma_opt) {
+		static const char *level[] = {
+			"-O0",
+			"-O1",
+			"-O2",
+			"-O3",
+			"-Os",
+			"-Og"
+		};
+
+		static const char *flags[] = {
+			#include "gcc-opt-switches"
+		};
+
+		out << "__attribute__((optimize(\""; 
+		out << level[rnd_upto(NELE(level) - 1)] << " ";
+		if (rnd_flipcoin(40)) {
+			int num = rnd_upto(5);
+			for (int i = 0; i < num; i++) {
+				int f = rnd_upto(NELE(flags) - 1);
+				if (rnd_flipcoin(50))
+					out << flags[f] << " ";
+				else
+					out << "-fno-" << flags[f] + 2 << " ";
+			}
+		}
+		out << "\"))) ";
+
 	}
 	rv->qfer.output_qualified_type(return_type, out);
 	out << " " << get_prefixed_name(name) << "(";
@@ -543,7 +574,7 @@ Function::OutputForwardDecl(std::ostream &out)
 {
 	if (is_builtin)
 		return;
-	OutputHeader(out);
+	OutputHeader(out, false);
 	out << ";";
 	outputln(out);
 }

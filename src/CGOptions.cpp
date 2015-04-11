@@ -184,6 +184,7 @@ DEFINE_GETTER_SETTER_BOOL(pre_incr_operator);
 DEFINE_GETTER_SETTER_BOOL(pre_decr_operator);
 DEFINE_GETTER_SETTER_BOOL(post_incr_operator);
 DEFINE_GETTER_SETTER_BOOL(post_decr_operator);
+bool CGOptions::pragma_opt = false;
 DEFINE_GETTER_SETTER_BOOL(unary_plus_operator);
 DEFINE_GETTER_SETTER_BOOL(use_embedded_assigns);
 DEFINE_GETTER_SETTER_BOOL(use_comma_exprs);

@@ -128,7 +128,7 @@ private:
 
 	Function(const std::string &name, const Type *return_type);
 	Function(const std::string &name, const Type *return_type, bool is_builtin);
-	void OutputHeader(std::ostream &);
+	void OutputHeader(std::ostream &, bool);
 	void OutputFormalParamList(std::ostream &);
 	void GenerateBody(const CGContext& prev_context);
 	void make_return_const();

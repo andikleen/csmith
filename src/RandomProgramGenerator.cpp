@@ -1359,6 +1359,11 @@ main(int argc, char **argv)
 			continue;
 		}
 
+		if (strcmp (argv[i], "--pragma-opt") == 0) {
+			CGOptions::pragma_opt = true;
+			continue;
+		}
+
 		if (strcmp (argv[i], "--reduce") == 0) {
 			string filename;
 			i++;
